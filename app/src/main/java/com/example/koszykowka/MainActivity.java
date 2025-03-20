@@ -1,6 +1,7 @@
 package com.example.koszykowka;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.example.koszykowka.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private PunktyViewModel punktyViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +19,34 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.textView.setText("87");
+        punktyViewModel = new ViewModelProvider(this).get(PunktyViewModel.class);
+
+
+        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
+
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                punktyViewModel.zwiekszPunkty(1);
+                binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
+            }
+        });
+
+        binding.button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                punktyViewModel.zwiekszPunkty(2);
+                binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
+            }
+        });
+
+        binding.button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                punktyViewModel.zwiekszPunkty(3);
+                binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
+            }
+        });
     }
 
 
